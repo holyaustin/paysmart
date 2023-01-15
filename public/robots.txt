@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://kezayya.vercel.app
+
+# Sitemaps
+Sitemap: https://kezayya.vercel.app/sitemap.xml
