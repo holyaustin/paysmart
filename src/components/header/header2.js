@@ -63,10 +63,13 @@ export default function Header() {
           <a>Home</a>
           </Link>
           <Link href="/addpool">
-          <a>Add Escrow Pool</a>
+          <a>Add Pool (Native) MATIC</a>
+          </Link>
+          <Link href="/addtoken">
+          <a>Add Pool (ERC20) PST Token</a>
           </Link>
           <Link href="/minttoken">
-          <a>Mint Token</a>
+          <a>Mint PST Token</a>
           </Link>
           <Link href="https://web3chat-kezayya.vercel.app/">
           <a target="_blank">Chat</a>

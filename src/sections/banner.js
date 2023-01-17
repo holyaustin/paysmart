@@ -32,12 +32,15 @@ const Banner = () => {
               A new and secure way to get paid for freelancing through an agent escrow contract. Try it out!.
               </p>
             </div>
+            <br />
+            <br />
             <ConnectWallet />
 {/**
             <Button type="submit" variant="primary" sx={styles.submit }>
               Start for free
             </Button>
  */}         
+            <br />
             <Text as="p" sx={styles.note} style={{color:`red`, fontSize: '15px', marginRight: '0.5rem', fontWeight: 'bold'}}>
             Don't be left out, Join this amazing web3 revolution..
             </Text>

@@ -12,17 +12,9 @@ import Web3Modal from "web3modal";
 //import { Wallet, providers } from "ethers";
 
 import escrowABI from "../../artifacts/escrow.json";
-import tokenABI from "../../artifacts/erc20.json";
-import { escrowAddress } from "../../config";
-//import { tokenAddress } from "../../config";
-const tokenAddress = "0x10Eb05edeA0F1d0dB7907d23541607F07CC6c35E"
+import { escrowAddress } from "../../config2";
+const tokenAddress = "0x8204861156bedE45f0aBaaf2bB752D702FCbF23A"
 const erc220 = "0x8204861156bedE45f0aBaaf2bB752D702FCbF23A"
-
-const APIKEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDA4Zjc4ODAwMkUzZDAwNEIxMDI3NTFGMUQ0OTJlNmI1NjNFODE3NmMiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY1MzA1NjE4NzM4MCwibmFtZSI6InBlbnNpb25maSJ9.agI-2V-FeK_eVRAZ-T6KGGfE9ltWrTUQ7brFzzYVwdM";
-
-//0x8204861156bedE45f0aBaaf2bB752D702FCbF23A
-//0x10Eb05edeA0F1d0dB7907d23541607F07CC6c35E
-//0xF98848a191064d4b9Dc26514343D17bCb56275c4
 
 const MintFile = () => {
   const navigate = useRouter();
@@ -62,17 +54,17 @@ const MintFile = () => {
       //const provider = new ethers.providers.Web3Provider(window.ethereum);
       const provider = new ethers.providers.Web3Provider(connection);
       console.log("Before connectedContract");
-      const contract = new ethers.Contract(erc220 , escrowABI, provider.getSigner());
-      console.log("Connected to contract", erc220 );
-      console.log("Variables are ", tokenAddress, recipient, agent, amount  );
+      const contract = new ethers.Contract(escrowAddress , escrowABI, provider.getSigner());
+      console.log("Connected to contract", escrowAddress );
+      console.log("Variables are ", escrowAddress, recipient, agent, amount  );
 
 
-      const Tx = await contract.depositByETH( recipient, agent, {
+      const Tx = await contract.depositByETH( recipient, agent, {value: ethers.utils.parseEther(amount),
         gasLimit: 900000,
       });
       console.log("File successfully created and added to Blockchain");
       await Tx.wait();
-      alert("Pool created successfully!")
+      setTxStatus("New Pool created successfully.");
       return Tx;
     } catch (error) {
       setErrorMessage("Failed to send tx to Polygon Mumbai.");
@@ -80,31 +72,21 @@ const MintFile = () => {
     }
   };
 
-  const previewNFT = (metaData, mintNFTTx) => {
-    console.log("getIPFSGatewayURL2 two is ...");
-    const imgViewString = getIPFSGatewayURL(metaData.data.image.pathname);
-    console.log("image ipfs path is", imgViewString);
-    setImageView(imgViewString);
-    setMetaDataURl(getIPFSGatewayURL(metaData.url));
-    setTxURL(`https://mumbai.polygonscan.com/tx/${mintNFTTx.hash}`);
-    setTxStatus("File addion was successfully!");
-    console.log("Preview details completed");
-  };
-
   return (
     <Box as="section"  sx={styles.section}>
-      <div className="bg-purple-100 text-4xl text-center text-black font-bold pt-10">
-        <h1> Add File</h1>
+            <div className="bg-purple-100 text-4xl text-center text-black font-bold pt-10">
+        <h1> Create Pool MATIC</h1>
       </div>
+      
       <div className="flex justify-center bg-purple-100">
         <div className="w-1/2 flex flex-col pb-12 ">
         <input
-            placeholder="Recipient"
+            placeholder="Recipient Address"
             className="mt-5 border rounded p-4 text-xl"
             onChange={(e) => updateFormInput({ ...formInput, recipient: e.target.value })}
           />
                   <input
-            placeholder="Agent"
+            placeholder="Agent Address"
             className="mt-5 border rounded p-4 text-xl"
             onChange={(e) => updateFormInput({ ...formInput, agent: e.target.value })}
           />
@@ -115,32 +97,15 @@ const MintFile = () => {
           />
          
           <div className="MintNFTtext-xl text-black">
-            {txStatus && <p>{txStatus}</p>}
+          <br />
+          <br />
+            {txStatus && <p className="text-xl">{txStatus}</p>}
             <br />
-            {metaDataURL && <p className="text-blue"><a href={metaDataURL} className="text-blue">Metadata on IPFS</a></p>}
-            <br />
-            {txURL && <p><a href={txURL} className="text-blue">See the mint transaction</a></p>}
-            <br />
-            {errorMessage}
-
-            <br />
-            {imageView && (
-            <iframe
-              className="mb-10"
-              title="File"
-              src={imageView}
-              alt="File preview"
-              frameBorder="0"
-              scrolling="auto"
-              height="50%"
-              width="100%"
-            />
-            )}
 
           </div>
 
           <button type="button" onClick={(e) => sendTxToBlockchain()} className="font-bold mt-20 bg-purple-700 text-white text-2xl rounded p-4 shadow-lg">
-            Publish File
+            Create Pool MATIC
           </button>
         </div>
       </div>

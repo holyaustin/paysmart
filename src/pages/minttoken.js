@@ -3,7 +3,7 @@ import { ThemeProvider } from 'theme-ui';
 import theme from 'theme';
 import SEO from 'components/seo';
 import Layout from 'components/layout2';
-import Mintfolder from 'components/Mintfolder';
+import Mintfile from 'components/Mintfile';
 
 export default function AddFolder() {
   return (
@@ -13,7 +13,7 @@ export default function AddFolder() {
           title="Add new folder"
           description="add a new folder"
         />
-        <Mintfolder />
+        <Mintfile />
 
       </Layout>
     </ThemeProvider>
